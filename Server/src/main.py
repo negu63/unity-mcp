@@ -5,6 +5,8 @@ import os
 if sys.platform == "win32":
     import msvcrt
     msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
+    # Disable Python's own newline translation and force UTF-8
+    sys.stdout.reconfigure(encoding='utf-8', newline='')
 
 import argparse
 import asyncio
