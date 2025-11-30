@@ -1,11 +1,10 @@
 import sys
 import os
 
-# Windows: use fdopen for explicit control
+# Windows: set binary mode for stdout
 if sys.platform == "win32":
-    import io
-    sys.stdout = io.open(sys.stdout.fileno(), 'w', encoding='utf-8', 
-                        newline='', closefd=False)
+    import msvcrt
+    msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
 
 import argparse
 import asyncio
