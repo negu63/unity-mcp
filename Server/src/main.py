@@ -24,6 +24,15 @@ from services.tools import register_all_tools
 from transport.legacy.unity_connection import get_unity_connection_pool, UnityConnectionPool
 from transport.unity_instance_middleware import UnityInstanceMiddleware, set_unity_instance_middleware
 
+import sys
+import os
+
+# Windows: use fdopen for explicit control
+if sys.platform == "win32":
+    import io
+    sys.stdout = io.open(sys.stdout.fileno(), 'w', encoding='utf-8', 
+                        newline='', closefd=False)
+
 # Configure logging using settings from config
 logging.basicConfig(
     level=getattr(logging, config.log_level),
